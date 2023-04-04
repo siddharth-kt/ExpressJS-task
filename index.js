@@ -39,6 +39,7 @@ let rateLimitData = {};
  * ]
  */
 
+/* POST - set configuration. */
 app.post("/configure", (request, response) => {
   const { routes, clients } = request.body;
 
@@ -132,7 +133,8 @@ function rateLimitChecker(client) {
   };
 }
 
-app.get("/:name", function (request, response) {
+/* GET - redirect requests. */
+app.get("/*", function (request, response) {
   // since each request is required to have "client-id" header, we will check it first.
   const client_id = request.headers["client-id"];
   if (!client_id) {
